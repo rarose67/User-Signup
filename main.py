@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, render_template
-
+import re
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -19,6 +19,8 @@ def signup():
     email_error = ""
     error_query = ""
     
+    regex = re.compile(r"[\w-]+@[\w-]+\.\w+")
+
     if (user == ""):
         # the user tried to enter an invalid username
         # so we redirect back to the front page and tell them what went wrong
@@ -36,11 +38,13 @@ def signup():
     if (pwd2 == "") or (pwd1 != pwd2):
         # the two passwords didn't match,
         # so we redirect back to the front page a nd tell them what went wrong
-        match_error = "The passwords <strong>did not</strong> match"
+        match_error = "The passwords did not match"
 
     if(email != ""):
-        if(len(email) < 3) or (len(email) > 20) or (email.count("@") != 1) or (email.count(".") != 1) or (" " in email):
-            # the user tried to enter an invalid password,
+        #if(len(email) < 3) or (len(email) > 20) or (email.count("@") != 1) or (email.count(".") != 1) or (" " in email):
+        valid_email = regex.match(email)
+        if(len(email) < 3) or (len(email) > 20) or (not valid_email):
+            # the user tried to enter an invalid email address,
             # so we redirect back to the front page and tell them what went wrong
             email_error = "The email must be 3-20 characters, must contain a '@' and a single '.', and can't contain spaces"
 

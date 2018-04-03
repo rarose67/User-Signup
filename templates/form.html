@@ -19,7 +19,7 @@
     <label for="vpswd">Verify Password:</label>
     <input id="vpswd" type="password" name="verify" value="" />
     {% if merror %}
-    <span class="error">{{ merror }} </span>
+    <span class="error">The passwords <strong>did not</strong> match.</span>
     {% endif %}
     <br>
     <label for="email">Email (optional):</label>

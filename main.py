@@ -19,6 +19,7 @@ def signup():
     email_error = ""
     error_query = ""
     
+    #Regular expression used for email validation 
     regex = re.compile(r"[\w-]+@[\w-]+\.\w+")
 
     if (user == ""):
@@ -37,16 +38,15 @@ def signup():
 
     if (pwd2 == "") or (pwd1 != pwd2):
         # the two passwords didn't match,
-        # so we redirect back to the front page a nd tell them what went wrong
+        # so we redirect back to the front page and tell them what went wrong
         match_error = "The passwords did not match"
 
-    if(email != ""):
-        #if(len(email) < 3) or (len(email) > 20) or (email.count("@") != 1) or (email.count(".") != 1) or (" " in email):
-        valid_email = regex.match(email)
+    if(email != ""):  #The email field can be left blank
+        valid_email = regex.match(email) #does the email match the regular expression. 
         if(len(email) < 3) or (len(email) > 20) or (not valid_email):
             # the user tried to enter an invalid email address,
             # so we redirect back to the front page and tell them what went wrong
-            email_error = "The email must be 3-20 characters, must contain a '@' and a single '.', and can't contain spaces"
+            email_error = "The email must be 3-20 characters, must contain a single '@' and a single '.', and can't contain spaces"
 
     if (user_error != ""):
             error_query += "&uerror=" + user_error
@@ -69,6 +69,7 @@ def signup():
 
 @app.route("/")
 def index():
+    #Retrieve query arguments for the url if the user was redirected here.
     uname = request.args.get("uname")
     email = request.args.get("email")
     uerror = request.args.get("uerror")
@@ -76,11 +77,14 @@ def index():
     merror = request.args.get("merror")
     eerror = request.args.get("eerror")
 
+    #If the username and email aren't sent as query parameters the previous statements set to None.
+    #In that case, they need to be set to empty strings.
     if uname == None:
         uname = ""
     if email == None:
         email = ""
 
+    #display the signup form.
     return render_template("form.html", title="User Signup", user=uname, email=email, uerror=uerror, perror=perror, merror=merror, eerror=eerror)
 
 app.run()

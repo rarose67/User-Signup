@@ -5,27 +5,35 @@
 <br>
 <form action="/signup" method="post">
     <label for="user">Username:</label>
-    <input id="user" type="text" name="user" value="{{user}}" />
     {% if uerror %}
+    <input id="user" class="ierror" type="text" name="user" value="{{user}}" />
     <span class="error">{{ uerror }} </span>
+    {% else %}
+    <input id="user" type="text" name="user" value="{{user}}" />
     {% endif %}
     <br>
     <label for="pass">Password:</label>
-    <input id="pass" type="password" name="pswd" value="" />
     {% if perror %}
+    <input id="pass" class="ierror" type="password" name="pswd" value="" />
     <span class="error">{{ perror }} </span>
+    {% else %}
+    <input id="pass" type="password" name="pswd" value="" />
     {% endif %}
     <br>
     <label for="vpswd">Verify Password:</label>
-    <input id="vpswd" type="password" name="verify" value="" />
     {% if merror %}
+    <input id="vpswd" class="ierror" type="password" name="verify" value="" />
     <span class="error">The passwords <strong>did not</strong> match.</span>
+    {% else %}
+    <input id="vpswd" type="password" name="verify" value="" />
     {% endif %}
     <br>
     <label for="email">Email (optional):</label>
-    <input id="email" type="text" name="email" value="{{email}}" />
     {% if eerror %}
+    <input id="email" class="ierror" type="text" name="email" value="{{email}}" />
     <span class="error">{{ eerror }} </span>
+    {% else %}
+    <input id="email" type="text" name="email" value="{{email}}" />
     {% endif %}
     <br>
     <input type="submit" />

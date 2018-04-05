@@ -11,3 +11,7 @@ form {
 .error {
     color: red;
 }
+
+.ierror {
+    background-color: yellow;
+}

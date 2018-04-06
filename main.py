@@ -27,7 +27,7 @@ def signup():
         # so we redirect back to the front page and tell them what went wrong
         user_error = "Please enter a valid user name."
     elif(len(user) < 3) or (len(user) > 20) or (" " in user):
-        user_error = "The uername must be 3-20 characters and can't contain spaces"
+        user_error = "The username must be 3-20 characters and can't contain spaces"
     
     if (pwd1 == ""):
         # the user tried to enter an invalid password,
